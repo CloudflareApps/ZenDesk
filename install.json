@@ -1,0 +1,29 @@
+{
+  "resources": {
+    "body": [
+      {
+        "type": "script",
+        "src": "./source/app.js"
+      }
+    ]
+  },
+  "preview": {
+    "handlers": [
+      {
+        "options": ["zendeskHost"],
+        "execute": "INSTALL_SCOPE.setHost(INSTALL_OPTIONS)"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "zendeskHost": {
+        "title": "Zendesk Host",
+        "description": "What's the subdomain associated with your Zendesk account?",
+        "placeholder": "example.zendesk.com",
+        "order": 0,
+        "type": "string"
+      }
+    }
+  }
+}
