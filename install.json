@@ -10,18 +10,37 @@
   "preview": {
     "handlers": [
       {
+        "options": ["zendeskAccount"],
+        "execute": "INSTALL_SCOPE.setAccount(INSTALL_OPTIONS)"
+      },
+      {
         "options": ["zendeskHost"],
         "execute": "INSTALL_SCOPE.setHost(INSTALL_OPTIONS)"
       }
     ]
   },
+  "hooks": [
+    {
+      "endpoint": "https://zendesk.com/path-to-API-handler",
+      "events": ["option-change:account"],
+      "block": true,
+      "authenticate": ["account"]
+    }
+  ],
   "options": {
     "properties": {
+      "account": {
+        "title": "Zendesk Account",
+        "type": "object",
+        "format": "account",
+        "services": ["zendesk"],
+        "order": 0
+      },
       "zendeskHost": {
         "title": "Zendesk Host",
         "description": "What's the subdomain associated with your Zendesk account?",
         "placeholder": "example.zendesk.com",
-        "order": 0,
+        "order": 1,
         "type": "string"
       }
     }

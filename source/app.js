@@ -69,6 +69,7 @@
       iframe.parentElement.removeChild(iframe)
     }
 
+    // TODO: Check if there's a better way to find this in the DOM.
     var launcher = document.querySelector('.zEWidget-launcher')
 
     if (launcher && launcher.parentElement) {
@@ -87,6 +88,11 @@
 
   // INSTALL_SCOPE is an object that is used to handle option changes without refreshing the page.
   window.INSTALL_SCOPE = {
+    setAccount: function setAccount (nextOptions) {
+      options = nextOptions
+
+      updateElement()
+    },
     setHost: function setHost (nextOptions) {
       clearTimeout(setDomainTimeout)
       options = nextOptions
