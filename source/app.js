@@ -7,8 +7,7 @@
   var setDomainTimeout
   var iframe
   var IS_PREVIEW = INSTALL_ID === 'preview'
-    // TODO: Add previewer demo account.
-  var PREVIEW_DOMAIN = 'cf-preview.zendesk.com'
+  var PREVIEW_DOMAIN = 'cloudflare-app-preview.zendesk.com'
 
   function insertSnippet () {
     var zendeskHost = options.zendeskHost.trim()
@@ -49,18 +48,23 @@
       _document = iframeFrameDocument
     }
 
-    _document.open()._l = function _l () {
-      var e = this.createElement('script')
-      domain && (this.domain = domain)
-      e.id = 'js-iframe-async'
-      e.src = 'https://assets.zendesk.com/embeddable_framework/main.js'
+    _document.open().loadCFZendesk = function loadCFZendesk () {
+      var script = this.createElement('script')
+
+      if (domain) {
+        this.domain = domain
+      }
+
+      script.id = 'js-iframe-async'
+      script.src = 'https://assets.zendesk.com/embeddable_framework/main.js'
+
       this.t = +new Date()
       this.zendeskHost = zendeskHost
       this.zEQueue = args
-      this.body.appendChild(e)
+      this.body.appendChild(script)
     }
 
-    _document.write('<body onload="document._l();">')
+    _document.write('<body onload="document.loadCFZendesk();">')
     _document.close()
   }
 
