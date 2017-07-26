@@ -7,7 +7,7 @@
   var setDomainTimeout
   var iframe
   var IS_PREVIEW = INSTALL_ID === 'preview'
-  var PREVIEW_DOMAIN = 'cloudflare-app-preview.zendesk.com'
+  var PREVIEW_DOMAIN = 'cf-app-preview.zendesk.com'
 
   function insertSnippet () {
     var zendeskHost = options.zendeskHost.trim()
