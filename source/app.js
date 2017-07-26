@@ -4,7 +4,7 @@
   if (!window.addEventListener) return // Check for IE9+
 
   var options = INSTALL_OPTIONS
-  var setDomainTimeout
+  var updateResetTimeout
   var iframe
   var IS_PREVIEW = INSTALL_ID === 'preview'
   var PREVIEW_DOMAIN = 'cf-app-preview.zendesk.com'
@@ -26,6 +26,34 @@
     }
 
     window.zE = window.zE || window.zEmbed
+
+    var settings = {}
+
+    if (options.position) {
+      var parts = options.position.split('-')
+      settings.position = {
+        vertical: parts[0],
+        horizontal: parts[1]
+      }
+    }
+
+    if (options.color) {
+      settings.color = {
+        theme: options.color
+      }
+    }
+
+    if (options.verticalOffset) {
+      settings.offset = settings.offset || {}
+      settings.offset.vertical = options.verticalOffset + 'px'
+    }
+
+    if (options.horizontalOffset) {
+      settings.offset = settings.offset || {}
+      settings.offset.horizontal = (options.horizontalOffset * -1) + 'px'
+    }
+
+    window.zESettings = {webWidget: settings}
 
     iframe.src = 'javascript:false'
     iframe.title = ''
@@ -73,6 +101,7 @@
       iframe.parentElement.removeChild(iframe)
     }
 
+    // TODO: Check if there's a better way to find this in the DOM.
     var launcher = document.querySelector('.zEWidget-launcher')
 
     if (launcher && launcher.parentElement) {
@@ -91,11 +120,11 @@
 
   // INSTALL_SCOPE is an object that is used to handle option changes without refreshing the page.
   window.INSTALL_SCOPE = {
-    setHost: function setHost (nextOptions) {
-      clearTimeout(setDomainTimeout)
+    updateReset: function updateReset (nextOptions) {
+      clearTimeout(updateResetTimeout)
       options = nextOptions
 
-      setDomainTimeout = setTimeout(updateElement, 1000)
+      updateResetTimeout = setTimeout(updateElement, 1000)
     }
   }
 }())

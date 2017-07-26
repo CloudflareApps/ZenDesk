@@ -10,8 +10,8 @@
   "preview": {
     "handlers": [
       {
-        "options": ["zendeskHost"],
-        "execute": "INSTALL_SCOPE.setHost(INSTALL_OPTIONS)"
+        "options": ["*"],
+        "execute": "INSTALL_SCOPE.updateReset(INSTALL_OPTIONS)"
       }
     ]
   },
@@ -21,8 +21,55 @@
         "title": "Zendesk Host",
         "description": "What's the subdomain associated with your Zendesk account?",
         "placeholder": "example.zendesk.com",
-        "order": 0,
+        "order": 1,
         "type": "string"
+      },
+      "color": {
+        "title": "Color",
+        "order": 2,
+        "type": "string",
+        "format": "color",
+        "default": "#30789b"
+      },
+      "position": {
+        "title": "Position",
+        "description": "Which corner of the page should the widget sit?",
+        "order": 3,
+        "type": "string",
+        "format": "radios",
+        "default": "bottom-right",
+        "enum": [
+          "top-left",
+          "top-right",
+          "bottom-left",
+          "bottom-right"
+        ],
+        "enumNames": {
+          "top-left": "Top left",
+          "top-right": "Top right",
+          "bottom-left": "Bottom left",
+          "bottom-right": "Bottom right"
+        }
+      },
+      "verticalOffset": {
+        "title": "Vertical Offset",
+        "description": "Adjust the position of the widget vertically.",
+        "order": 4,
+        "type": "number",
+        "format": "slider",
+        "minimum": -500,
+        "maximum": 500,
+        "default": 0
+      },
+      "horizontalOffset": {
+        "title": "Horizontal Offset",
+        "description": "Adjust the position of the widget horizontally.",
+        "order": 5,
+        "type": "number",
+        "format": "slider",
+        "minimum": -500,
+        "maximum": 500,
+        "default": 0
       }
     }
   }
