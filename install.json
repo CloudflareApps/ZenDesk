@@ -21,6 +21,7 @@
         "title": "Zendesk Host",
         "description": "What's the subdomain associated with your Zendesk account?",
         "placeholder": "example.zendesk.com",
+        "required": true,
         "order": 1,
         "type": "string"
       },
